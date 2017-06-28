@@ -1,0 +1,5 @@
+转https://github.com/digoal/blog/blob/master/201704/20170422_01.md
+
+实际上geohash是一套网格化的编码方式，经过编码，可以将经纬度对应的点，表示为一个网格，网格的大小，取决于geohash的精度。
+
+通常，geohash使用32个字符进行编码。业界也有使用geo base 36的编码，即36个字符来表示的。
