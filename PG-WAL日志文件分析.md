@@ -1,4 +1,4 @@
-# 【WAL日志文件分析】（http://note.youdao.com/noteshare?id=041ccb498603cc49f97334bd11205eed&sub=31A45DB2344D4A70A4E08453207D5569）
+# [WAL日志文件分析](http://note.youdao.com/noteshare?id=041ccb498603cc49f97334bd11205eed&sub=31A45DB2344D4A70A4E08453207D5569)
 
 Log Sequence Number：WAL日志的绝对位置
 
@@ -43,3 +43,5 @@ student=> select pg_xlogfile_name_offset('2/694C58A8');
       pg_xlogfile_name_offset       
 ------------------------------------
  (000000010000000200000069,5003432)
+ 
+ 参考文档<<WAL日志文件的秘密>>
