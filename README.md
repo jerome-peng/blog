@@ -1,3 +1,3 @@
-# blog
-my blog
-Jerome的PostgreSQL分享
+# Jerome's blog
+
+PostgreSQL资料分享
