@@ -1,6 +1,5 @@
 
-[有道云笔记链接]（http://note.youdao.com/noteshare?id=21ae3240351fe17e8de66a764d0d61eb&sub=27AC4B408D364263AAD6EC6D0DE22E6A）
-[我的博客](http://blog.csdn.net/guodongxiaren)
+![PG进程作用]（http://note.youdao.com/noteshare?id=21ae3240351fe17e8de66a764d0d61eb&sub=27AC4B408D364263AAD6EC6D0DE22E6A）
 
 postmaster -- 所有数据库进程的主进程(负责监听和fork子进程)
 startup -- 主要用于数据库恢复的进程
