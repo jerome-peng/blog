@@ -1,0 +1,71 @@
+# [查看功能](http://note.youdao.com/noteshare?id=49e1b932e6de1e169637e2a6ba6649b3&sub=ED39B9323306480ABF6666565346B95D)
+
+查看表或索引的大小
+--查询一个索引大小
+ select pg_size_pretty(pg_relation_size('indexname‘))
+--查看一张表及索引总大小
+select pg_size_pretty(pg_total_relation_size('tablename'));
+--查看所有 schema里面索引大小，大到小的顺序排列： 
+select indexrelname,pg_size_pretty( pg_relation_size(relid))                     
+from pg_stat_user_indexes where schemaname = 'schemaname' order by pg_relation_size(relid) desc;
+--查看所有 schema里面表的大小，从大到小顺序排列： 
+select relname, pg_size_pretty(pg_relation_size(relid))
+from pg_stat_user_tables where schemaname = 'schemaname' order by pg_relation_size(relid) desc;
+--查看数据库大小： 
+select pg_database.datname,pg_size_pretty(pg_database_size(pg_database.datname)) AS size
+from pg_database;
+--查看表空间大小
+select pg_tablespace_size('tbs_index')/1024/1024 as "SIZE M";   
+
+查看OID
+to_regclass(rel_name)	regclass	获得命名关系的OID
+to_regproc(func_name)	regproc	获得命名函数的OID
+to_regprocedure(func_name)	regprocedure	获得命名函数的OID
+to_regoper(operator_name)	regoper	获得命名操作符的OID
+to_regoperator(operator_name)	regoperator	获得命名操作符的OID
+to_regtype(type_name)	regtype	获得命名类型的OID
+to_regnamespace(schema_name)	regnamespace	获得命名模式的OID
+to_regrole(role_name)	regrole	获得命名角色的OID
+
+查看表字段定义信息
+SELECT col_description(a.attrelid,a.attnum) as comment,format_type(a.atttypid,a.atttypmod) as type,a.attname as name, a.attnotnull as notnull  
+FROM pg_class as c,pg_attribute as a  
+where c.relname = 'basic_dept' and a.attrelid = c.oid and a.attnum>0  
+
+查看那些表使用了timestamp with time zone
+select attrelid ::regclass, attname, atttypid ::regtype
+from pg_attribute
+where attnum > 0
+and attisdropped = 'f'
+and 
+atttypid=1184
+
+查看函数定义
+select prosrc from pg_proc where proname='analyze_bus';
+\df+ eafc.analyze_bus
+select pg_get_functiondef(to_regproc('analyze_bus'));
+
+查看schema和table的使用权限
+表上权限查询：
+select * from INFORMATION_SCHEMA.role_table_grants；
+select * from information_schema.table_privileges where grantee='user_name';
+
+查usage授权
+select * from information_schema.usage_privileges where grantee='user_name';
+
+查看临时表空间使用率
+SELECT datname,temp_files AS "Temporary files"
+     , temp_bytes AS "Size of temporary files"
+FROM   pg_stat_database db;
+  datname   | Temporary files | Size of temporary files 
+------------+-----------------+-------------------------
+ template1  |               0 |                       0
+ template0  |               0 |                       0
+ student    |               1 |                 2637824
+ csite      |               0 |                       0
+ tcmm       |               0 |                       0
+ icreceiver |               0 |                       0
+ sam        |               0 |                       0
+ ambari     |               0 |                       0
+ dafc       |           21274 |             46425003451
+(9 rows)
