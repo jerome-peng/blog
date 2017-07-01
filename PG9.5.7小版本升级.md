@@ -1,8 +1,8 @@
-小版本升级数据库后对现有的database需要进行如下操作
+#小版本升级数据库后对现有的database需要进行如下操作
 
-1 Restart the postmaster after adding allow_system_table_mods = true to postgresql.conf.
+## 1 修改postgresql.conf添加allow_system_table_mods = true，然后重启数据库
 
-2 In each database of the cluster, run the following commands as superuser:
+## 2 每个数据库使用超级用户执行如下命令
 
 SET search_path = pg_catalog;
 CREATE OR REPLACE VIEW pg_user_mappings AS
@@ -25,14 +25,14 @@ CREATE OR REPLACE VIEW pg_user_mappings AS
          LEFT JOIN pg_authid A ON (A.oid = U.umuser) JOIN
         pg_foreign_server S ON (U.umserver = S.oid);
         
-3 template0 and template1 databases
+## 3 修改template0 和 template1
 
 ALTER DATABASE template0 WITH ALLOW_CONNECTIONS true;
 
-and then after fixing template0, undo that with
+参考步骤2
 
 ALTER DATABASE template0 WITH ALLOW_CONNECTIONS false;
 
-4 Finally, remove the allow_system_table_mods configuration setting, and again restart the postmaster.
+## 4移除postgresql.conf里allow_system_table_mods，重启数据库
 
 参考https://www.postgresql.org/docs/9.5/static/release-9-5-7.html
