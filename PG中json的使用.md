@@ -1,4 +1,4 @@
-# http://note.youdao.com/noteshare?id=06f142c7ba6af524c140b86744baecf2&sub=3326A58D38744FA193E1C9F55CD07A7B
+# [PG中json的使用](http://note.youdao.com/noteshare?id=06f142c7ba6af524c140b86744baecf2&sub=3326A58D38744FA193E1C9F55CD07A7B)
 
 查询返回JSON字符串
 student=> select row_to_json(b.*) from basic_dept b where b.dept_no=0;   
