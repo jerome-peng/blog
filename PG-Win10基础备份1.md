@@ -1,5 +1,4 @@
-
-
+# Win10基础备份1
 
 SELECT pg_start_backup('2017022102');
  \! zip -r C:\tcps\pg-full-bak\fullbackup2017022102.zip C:\tcps\pg1\data -x C:\tcps\pg1\data\postmaster.pid ;
