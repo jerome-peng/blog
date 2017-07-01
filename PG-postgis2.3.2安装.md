@@ -132,3 +132,46 @@ make && make install
 
 确认postgis组间已安装
 ll /opt/PostgreSQL/9.5/share/postgresql/extension/postgis*
+
+创建一个空间测试库
+psql -U postgres 
+postgres=# create database gis template template0 encoding 'UTF8';
+CREATE DATABASE
+
+在空间测试库中加载postgis 和 postgis_topology 模块
+使用超级用户创建这两个模块
+gis=# create extension postgis;
+ERROR:  could not load library "/opt/PostgreSQL/9.5/lib/postgresql/postgis-2.3.so": libgeos_c.so.1: cannot open shared object file: No such file or directory
+
+ldd /opt/PostgreSQL/9.5/lib/postgresql/postgis-2.3.so
+	linux-vdso.so.1 =>  (0x00007fff3dd55000)
+	libgeos_c.so.1 => /usr/local/geos/lib/libgeos_c.so.1 (0x00007ffd5e122000)
+	libproj.so.12 => /usr/local/proj/lib/libproj.so.12 (0x00007ffd5deb7000)
+	libxml2.so.2 => /opt/PostgreSQL/9.5/lib/libxml2.so.2 (0x00007ffd5daf7000)
+	libm.so.6 => /lib64/libm.so.6 (0x00007ffd5d867000)
+	libc.so.6 => /lib64/libc.so.6 (0x00007ffd5d4d2000)
+	libgeos-3.6.1.so => /usr/local/geos/lib/libgeos-3.6.1.so (0x00007ffd5d118000)
+	libstdc++.so.6 => /usr/lib64/libstdc++.so.6 (0x00007ffd5ce12000)
+	libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00007ffd5cbfb000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x00007ffd5c9de000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x00007ffd5c7da000)
+	libz.so.1 => /opt/PostgreSQL/9.5/lib/libz.so.1 (0x00007ffd5c5be000)
+	libiconv.so.2 => /opt/PostgreSQL/9.5/lib/libiconv.so.2 (0x00007ffd5c2cf000)
+	/lib64/ld-linux-x86-64.so.2 (0x0000003db3600000)
+
+以上错误是由于新安装的插件动态库文件未加载到系统，手工加载如下：
+
+vi /etc/ld.so.conf.d/proj.conf
+/usr/local/proj/lib
+ldconfig
+
+vi /etc/ld.so.conf.d/geos.conf
+/usr/local/geos/lib
+ldconfig
+
+vi /etc/ld.so.conf.d/gdal.conf
+/usr/local/gdal/lib
+ldconfig
+ldconfig通常在系统启动时运行，而当用户安装了一个新的动态链接库时，就需要手工运行这个命令。
+
+gis=# create extension postgis_topology;
