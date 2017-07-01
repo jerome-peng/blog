@@ -1,4 +1,4 @@
-#小版本升级数据库后对现有的database需要进行如下操作
+# 小版本升级数据库后对现有的database需要进行如下操作
 
 ## 1 修改postgresql.conf添加allow_system_table_mods = true，然后重启数据库
 
