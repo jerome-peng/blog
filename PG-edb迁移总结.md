@@ -1,5 +1,7 @@
 # [edb迁移至PG总结](http://note.youdao.com/noteshare?id=http://note.youdao.com/noteshare?id=9127644e626b25f230d40f3ef3f0890b&sub=A2D044B2279347608328B777EC7BBCE4)
 
+## 时间：2016年8月30号
+
 1 修改表结构时需要先删除视图引用
 
 2 pg没有存储过程，所有的块操作都通过函数完成
