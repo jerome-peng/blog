@@ -1,0 +1,25 @@
+
+digoal
+
+201208/20120831_02.md 《表级复制(base on trigger) -- multi master replication & performance tuning》
+
+201208/20120831_01.md 《表级复制(base on trigger) -- one(rw) to many(ro|rw)》
+
+201209/20120907_01.md 《PostgreSQL general public partition table trigger》
+
+PostgreSQL 9.5 使用 import foreign schema 语法一键创建外部表
+
+PostgreSQL 审计 - pg_audit module
+https://github.com/digoal/blog/blob/master/201505/20150515_01.md
+
+PostgreSQL Oracle 兼容性之 - 函数 自治事务 的写法和实现
+https://github.com/digoal/blog/blob/master/201602/20160203_02.md
+
+PostgreSQL 如何实现upsert与新旧数据自动分离
+https://github.com/digoal/blog/blob/master/201605/20160524_02.md
+
+PostgreSQL 批量权限管理方法
+https://github.com/digoal/blog/blob/master/201605/20160529_01.md
+
+德哥的PostgreSQL私房菜 - 史上最屌PG资料合集
+https://github.com/digoal/blog/blob/master/201608/20160818_02.md
