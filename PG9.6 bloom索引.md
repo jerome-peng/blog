@@ -8,4 +8,5 @@ create index idx on test using bloom(id);
 
 ## 参考 
 https://github.com/digoal/blog/blob/master/201605/20160523_01.md
+
 http://www.postgresql.org/docs/9.6/static/bloom.html
