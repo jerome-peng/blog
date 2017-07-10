@@ -1,5 +1,5 @@
 # [PG业务函数代码版本管理](http://note.youdao.com/noteshare?id=4dddacb3ddb3018255d611e60a13a5bb&sub=4797C4FE3E81416AB3C4A2B8133CB009)
-<h1>
+<h1/>
 ## 1. 创建存储函数代码的表
 create table public.svn_func(  
   id serial8 primary key,  -- 序列  
@@ -12,8 +12,6 @@ create table public.svn_func(
   crt_time timestamp, -- DDL时间  
   content text  -- DDL翻译成文本  
 );  
-
-
 ## 2. 创建事件触发器函数
 create or replace function public.push_to_svn_func() returns event_trigger as $$  
 declare  
@@ -35,8 +33,6 @@ begin
   end LOOP;  
 end;  
 $$ language plpgsql strict;  
-
-
 ## 3. 创建事件触发器
 student=# create event trigger et1 on ddl_command_end  when TAG in ('create function') execute procedure push_to_svn_func();  
 CREATE EVENT TRIGGER
@@ -49,8 +45,6 @@ revoke delete on public.svn_func from ebas,eafc;
 revoke truncate on public.svn_func from ebas,eafc;
 revoke references on public.svn_func from ebas,eafc;
 revoke trigger on public.svn_func from ebas,eafc;
-
-
 ## 4. 测试
 ### 4.1 创建函数(eafc)
 create or replace function f123(id int) returns int as $$                                                           
@@ -60,14 +54,14 @@ return id+1;
 end;  
 $$ language plpgsql strict; 
 CREATE FUNCTION
-###4.2 创建同名，但是参数不同的函数(eafc)
+### 4.2 创建同名，但是参数不同的函数(eafc)
 create or replace function f123(id int, diff int) returns int as $$  
 declare  
 begin  
 return id+diff;  
 end;  
 $$ language plpgsql strict;  
-###4.3 创建完全相同的函数，写入不同的SCHEMA(ebas)
+### 4.3 创建完全相同的函数，写入不同的SCHEMA(ebas)
 create or replace function ebas.f123(id int, diff int) returns int as $$  
 declare  
 begin  
