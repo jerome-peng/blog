@@ -1,5 +1,6 @@
 # [PG业务函数代码版本管理](http://note.youdao.com/noteshare?id=4dddacb3ddb3018255d611e60a13a5bb&sub=4797C4FE3E81416AB3C4A2B8133CB009)
-<h1/>
+<hr>
+<hr>
 ## 1. 创建存储函数代码的表
 create table public.svn_func(  
   id serial8 primary key,  -- 序列  
