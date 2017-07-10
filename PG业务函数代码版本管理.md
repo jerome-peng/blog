@@ -76,5 +76,15 @@ end;
 $$ language plpgsql strict;
 ### 4.5 查看函数内容记录
 select * from svn_func;
+### 4.6 回退测试
+比如你想将某个函数，回退到以前的版本，在svn_func表中选定一条ID的content, 执行即可。
+do language plpgsql $$  
+declare  
+  sql text;  
+begin  
+  select content into sql from svn_func where id=2;  
+  execute sql;  
+end;  
+$$;  
 
 参考https://github.com/digoal/blog/blob/master/201703/20170305_01.md
